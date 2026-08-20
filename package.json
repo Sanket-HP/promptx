@@ -10,7 +10,10 @@
     "packages/*"
   ],
   "scripts": {
-    "build": "npm run build --workspaces --if-present",
+    "build:packages": "npm --workspace=packages/shared run build && npm --workspace=packages/token-engine run build && npm --workspace=packages/compression run build && npm --workspace=packages/optimizer run build && npm --workspace=packages/cache run build && npm --workspace=packages/pricing run build && npm --workspace=packages/providers run build && npm --workspace=packages/routing run build && npm --workspace=packages/sdk run build && npm --workspace=packages/database run build",
+    "build:api": "npm run build:packages && npm --workspace=apps/api run build",
+    "build:web": "npm run build:packages && npm --workspace=apps/web run build",
+    "build": "npm run build:packages && npm --workspace=apps/api run build && npm --workspace=apps/web run build",
     "test": "npm run test --workspaces --if-present",
     "dev": "npm --workspace=apps/api run dev",
     "dev:web": "npm --workspace=apps/web run dev",
@@ -20,6 +23,11 @@
     "prisma:seed": "npm --workspace=packages/database run seed"
   },
   "dependencies": {
+    "express": "^4.18.2",
+    "cors": "^2.8.5",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.5",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "@types/node": "^20.11.0"
@@ -50,5 +58,10 @@
     "ts-interface-checker": "^0.1.13",
     "sucrase": "^3.35.0",
     "watchpack": "^2.4.0"
+  },
+  "overrides": {
+    "styled-jsx": {
+      "react": "$react"
+    }
   }
 }

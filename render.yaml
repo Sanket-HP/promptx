@@ -5,7 +5,7 @@ services:
     name: promptx-api
     env: node
     region: oregon
-    buildCommand: npm ci --legacy-peer-deps && npm run build --workspaces --if-present
+    buildCommand: npm ci --legacy-peer-deps && npm run build:api
     startCommand: node apps/api/dist/main.js
     healthCheckPath: /health
     envVars:
@@ -35,7 +35,7 @@ services:
     name: promptx-web
     env: node
     region: oregon
-    buildCommand: npm ci --legacy-peer-deps && npm --workspace=apps/web run build
+    buildCommand: npm ci --legacy-peer-deps && npm run build:web
     startCommand: npm --workspace=apps/web run start
     envVars:
       - key: NODE_ENV
