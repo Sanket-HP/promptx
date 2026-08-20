@@ -2,7 +2,7 @@
   "name": "promptx-monorepo",
   "version": "1.0.0",
   "private": true,
-  "description": "PromptX - Intelligent LLM Token Optimization Platform & PromptX Gateway",
+  "description": "PromptX - Intelligent LLM Token Optimization Platform & TokenForge Gateway",
   "author": "PromptX Team",
   "license": "MIT",
   "workspaces": [
@@ -19,8 +19,14 @@
     "prisma:push": "npm --workspace=packages/database run push",
     "prisma:seed": "npm --workspace=packages/database run seed"
   },
+  "dependencies": {
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "@types/node": "^20.11.0"
+  },
   "devDependencies": {
     "typescript": "^5.2.2",
+    "styled-jsx": "5.1.1",
     "postcss": "^8.4.31",
     "postcss-selector-parser": "^6.0.13",
     "postcss-nested": "^6.0.1",
