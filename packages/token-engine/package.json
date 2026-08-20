@@ -1,0 +1,17 @@
+{
+  "name": "@promptx/token-engine",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
+  "dependencies": {
+    "@promptx/shared": "1.0.0",
+    "js-tiktoken": "^1.0.8"
+  },
+  "devDependencies": {
+    "typescript": "^5.2.2"
+  }
+}

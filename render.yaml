@@ -1,0 +1,63 @@
+# Render Production Blueprint for PromptX / TokenForge
+services:
+  # 1. API Gateway Service (NestJS / Express backend)
+  - type: web
+    name: promptx-api
+    env: node
+    region: oregon
+    buildCommand: npm ci --legacy-peer-deps && npm run build --workspaces --if-present
+    startCommand: node apps/api/dist/main.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 4000
+      - key: CORS_ORIGIN
+        fromService:
+          type: web
+          name: promptx-web
+          property: url
+      - key: DATABASE_URL
+        fromDatabase:
+          name: promptx-postgres
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          type: redis
+          name: promptx-redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+
+  # 2. Web SaaS Dashboard Service (Next.js frontend)
+  - type: web
+    name: promptx-web
+    env: node
+    region: oregon
+    buildCommand: npm ci --legacy-peer-deps && npm --workspace=apps/web run build
+    startCommand: npm --workspace=apps/web run start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3000
+      - key: NEXT_PUBLIC_API_URL
+        fromService:
+          type: web
+          name: promptx-api
+          property: url
+
+# Managed Databases
+databases:
+  - name: promptx-postgres
+    databaseName: promptx_db
+    user: promptx
+    region: oregon
+
+# Managed Redis (Private Service / Addon)
+redis:
+  - name: promptx-redis
+    region: oregon
+    plan: free
+    maxmemoryPolicy: allkeys-lru
