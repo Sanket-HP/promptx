@@ -1,4 +1,4 @@
-# TokenForge — Intelligent LLM Token Optimization Platform
+# PromptX — Intelligent LLM Token Optimization Platform
 
 > **Tagline:** *"More intelligence. Fewer tokens."*  
 > **Platform Name:** PromptX  
