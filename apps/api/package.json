@@ -6,7 +6,8 @@
     "prebuild": "npm run build:packages --prefix ../..",
     "build": "tsc",
     "dev": "ts-node-dev --respawn --transpile-only src/main.ts",
-    "start": "node dist/main.js"
+    "start": "node dist/main.js",
+    "start:prod": "node dist/main.js"
   },
   "dependencies": {
     "@promptx/shared": "1.0.0",
