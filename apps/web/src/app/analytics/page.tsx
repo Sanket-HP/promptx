@@ -3,12 +3,13 @@ import { useEffect, useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import { BarChart3, TrendingDown, DollarSign, Zap } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { apiFetch } from '@/lib/api';
 
 export default function AnalyticsPage() {
   const [data, setData] = useState<any>(null);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/v1/analytics/dashboard')
+    apiFetch('/api/v1/analytics/dashboard')
       .then(res => res.json())
       .then(setData)
       .catch(console.error);

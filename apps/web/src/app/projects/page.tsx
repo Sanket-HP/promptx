@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import { FolderKanban, Plus, CheckCircle2 } from 'lucide-react';
+import { apiFetch } from '@/lib/api';
 
 export default function ProjectsPage() {
   const [projects, setProjects] = useState<any[]>([]);
@@ -9,7 +10,7 @@ export default function ProjectsPage() {
   const [mode, setMode] = useState('BALANCED');
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/v1/projects')
+    apiFetch('/api/v1/projects')
       .then(res => res.json())
       .then(data => setProjects(data))
       .catch(console.error);
@@ -18,7 +19,7 @@ export default function ProjectsPage() {
   const createProject = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!name) return;
-    const res = await fetch('http://localhost:4000/api/v1/projects', {
+    const res = await apiFetch('/api/v1/projects', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name, optimizationMode: mode })

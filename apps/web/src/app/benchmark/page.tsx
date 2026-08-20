@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import DiffViewer from '@/components/DiffViewer';
 import { Zap, Sparkles, ArrowRight } from 'lucide-react';
+import { apiFetch } from '@/lib/api';
 
 export default function BenchmarkPage() {
   const [prompt, setPrompt] = useState(
@@ -15,7 +16,7 @@ export default function BenchmarkPage() {
   const runBenchmark = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:4000/api/v1/benchmark/run', {
+      const res = await apiFetch('/api/v1/benchmark/run', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ prompt, mode })

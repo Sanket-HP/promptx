@@ -2,12 +2,13 @@
 import { useEffect, useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import { Cpu, DollarSign } from 'lucide-react';
+import { apiFetch } from '@/lib/api';
 
 export default function ModelsPage() {
   const [specs, setSpecs] = useState<any[]>([]);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/v1/models/pricing')
+    apiFetch('/api/v1/models/pricing')
       .then(res => res.json())
       .then(setSpecs)
       .catch(console.error);

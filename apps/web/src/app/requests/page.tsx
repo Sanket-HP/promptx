@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import Link from 'next/link';
 import { FileCode2, Search, Filter, Sparkles, ArrowRight, Zap, CheckCircle2 } from 'lucide-react';
+import { apiFetch } from '@/lib/api';
 
 export default function RequestsPage() {
   const [requests, setRequests] = useState<any[]>([]);
@@ -10,7 +11,7 @@ export default function RequestsPage() {
   const [filterMode, setFilterMode] = useState<string>('ALL');
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/v1/requests')
+    apiFetch('/api/v1/requests')
       .then(res => res.json())
       .then(data => setRequests(data))
       .catch(err => console.error(err));

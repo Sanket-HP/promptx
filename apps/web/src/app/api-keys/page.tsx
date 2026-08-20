@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import { Key, Plus, Copy, CheckCircle2 } from 'lucide-react';
+import { apiFetch } from '@/lib/api';
 
 export default function ApiKeysPage() {
   const [keys, setKeys] = useState<any[]>([]);
@@ -9,7 +10,7 @@ export default function ApiKeysPage() {
   const [createdKey, setCreatedKey] = useState<string | null>(null);
 
   const fetchKeys = () => {
-    fetch('http://localhost:4000/api/v1/projects/proj-prod-001/api-keys')
+    apiFetch('/api/v1/projects/proj-prod-001/api-keys')
       .then(res => res.json())
       .then(setKeys)
       .catch(console.error);
@@ -21,7 +22,7 @@ export default function ApiKeysPage() {
 
   const createKey = async (e: React.FormEvent) => {
     e.preventDefault();
-    const res = await fetch('http://localhost:4000/api/v1/projects/proj-prod-001/api-keys', {
+    const res = await apiFetch('/api/v1/projects/proj-prod-001/api-keys', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name: keyName || 'Production API Key' })

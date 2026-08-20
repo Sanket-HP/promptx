@@ -19,8 +19,8 @@ import { ProviderFactory } from '@promptx/providers';
 import { defaultModelRouter } from '@promptx/routing';
 
 const app = express();
-const corsOrigin = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',') : '*';
-app.use(cors({ origin: corsOrigin }));
+const corsOrigin = process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',').map(o => o.trim()) : '*';
+app.use(cors({ origin: corsOrigin, credentials: true }));
 app.use(express.json({ limit: '10mb' }));
 
 const JWT_SECRET = process.env.JWT_SECRET || 'promptx_jwt_secret_key_12345';

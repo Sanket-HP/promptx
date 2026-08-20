@@ -2,12 +2,13 @@
 import { useEffect, useState } from 'react';
 import Sidebar from '@/components/Sidebar';
 import { ShieldAlert, Activity, Users, Server, HardDrive } from 'lucide-react';
+import { apiFetch } from '@/lib/api';
 
 export default function AdminPage() {
   const [adminData, setAdminData] = useState<any>(null);
 
   useEffect(() => {
-    fetch('http://localhost:4000/api/v1/admin/overview')
+    apiFetch('/api/v1/admin/overview')
       .then(res => res.json())
       .then(setAdminData)
       .catch(console.error);

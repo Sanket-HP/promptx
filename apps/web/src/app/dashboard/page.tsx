@@ -24,6 +24,7 @@ import {
   BarChart,
   Bar
 } from 'recharts';
+import { apiFetch } from '@/lib/api';
 
 export default function DashboardPage() {
   const [data, setData] = useState<any>(null);
@@ -32,7 +33,7 @@ export default function DashboardPage() {
   const fetchData = async () => {
     setLoading(true);
     try {
-      const res = await fetch('http://localhost:4000/api/v1/analytics/dashboard');
+      const res = await apiFetch('/api/v1/analytics/dashboard');
       if (res.ok) {
         const json = await res.json();
         setData(json);

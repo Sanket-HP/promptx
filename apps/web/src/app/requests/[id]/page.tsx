@@ -4,13 +4,14 @@ import Sidebar from '@/components/Sidebar';
 import DiffViewer from '@/components/DiffViewer';
 import Link from 'next/link';
 import { ArrowLeft, Sparkles, Clock, DollarSign, Zap, CheckCircle2 } from 'lucide-react';
+import { apiFetch } from '@/lib/api';
 
 export default function RequestInspectorPage({ params }: { params: { id: string } }) {
   const [record, setRecord] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:4000/api/v1/requests/${params.id}`)
+    apiFetch(`/api/v1/requests/${params.id}`)
       .then(res => res.json())
       .then(data => {
         setRecord(data);

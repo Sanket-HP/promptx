@@ -1,6 +1,7 @@
 import Navigation from '@/components/Navigation';
 import Calculator from '@/components/Calculator';
 import Link from 'next/link';
+import { API_BASE_URL } from '@/lib/api';
 import {
   ArrowRight,
   Zap,
@@ -93,7 +94,7 @@ export default function LandingPage() {
             </div>
             <div className="bg-slate-950 border border-emerald-500/30 p-5 rounded-xl">
               <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider block mb-2">After (PromptX Gateway)</span>
-              <code className="text-emerald-300 text-xs block">http://localhost:4000/v1/chat/completions</code>
+              <code className="text-emerald-300 text-xs block">{API_BASE_URL}/v1/chat/completions</code>
             </div>
           </div>
         </div>
